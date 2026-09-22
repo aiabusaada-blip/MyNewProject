@@ -1,44 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabase } from "@/lib/supabase/client";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
-// GET /api/graph/products — List all products with vendor info
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const query = searchParams.get("q");
-  const vendor = searchParams.get("vendor");
-  const capability = searchParams.get("capability");
-
   try {
-    let q = supabase
-      .from("products")
-      .select(`
-        id, name, name_ar, description, sort_order,
-        vendor_id,
-        vendor:vendors (id, name, name_ar),
-        category_id,
-        category:technology_categories (id, name, name_ar),
-        capabilities:product_capabilities (
-          id, proficiency_level,
-          capability:capabilities (id, name, name_ar)
-        )
-      `);
+    const supabase = getSupabase();
+    const { searchParams } = request.nextUrl;
+    const domain = searchParams.get("domain");
+    const category = searchParams.get("category");
+    const q = searchParams.get("q");
 
-    if (query) {
-      q = q.or(`name.ilike.%${query}%,name_ar.ilike.%${query}%`);
-    }
-    if (vendor) {
-      q = q.eq("vendor_id", (await supabase.from("vendors").select("id").eq("name", vendor).single()).data?.id);
-    }
+    let query = supabase.from("products").select(`
+      *,
+      vendor:vendors(name, name_ar),
+      category:technology_categories(name, name_ar),
+      product_capabilities:product_capabilities(capability:capabilities(name, name_ar))
+    `).order("sort_order", { ascending: true });
 
-    const { data, error } = await q.order("sort_order");
+    if (domain) query = query.eq("domain_id", domain);
+    if (category) query = query.eq("category_id", category);
+    if (q) query = query.ilike("name", `%${q}%`);
+
+    const { data, error } = await query;
     if (error) throw error;
-    return NextResponse.json({ products: data || [] });
+    return NextResponse.json({ products: data });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
+    return NextResponse.json({ error: "Failed" }, { status: 500 });
   }
 }

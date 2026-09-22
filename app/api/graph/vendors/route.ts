@@ -1,31 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabase } from "@/lib/supabase/client";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
-// GET /api/graph/vendors — List all vendors
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const query = searchParams.get("q");
-
   try {
-    let q = supabase
-      .from("vendors")
-      .select(`
-        id, name, name_ar, description, headquarters_country_id, website, sort_order
-      `);
+    const supabase = getSupabase();
+    const { searchParams } = request.nextUrl;
+    const q = searchParams.get("q");
 
-    if (query) {
-      q = q.or(`name.ilike.%${query}%,name_ar.ilike.%${query}%`);
-    }
+    let query = supabase.from("vendors").select(`
+      *,
+      products(name, name_ar)
+    `).order("sort_order", { ascending: true });
 
-    const { data, error } = await q.order("sort_order");
+    if (q) query = query.ilike("name", `%${q}%`);
+
+    const { data, error } = await query;
     if (error) throw error;
-    return NextResponse.json({ vendors: data || [] });
+    return NextResponse.json({ vendors: data });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch vendors" }, { status: 500 });
+    return NextResponse.json({ error: "Failed" }, { status: 500 });
   }
 }
