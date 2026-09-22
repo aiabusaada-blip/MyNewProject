@@ -2,13 +2,19 @@
   "common": {
     "app_name": "Nujeel",
     "tagline": "Describe the capability you need. Nujeel finds who can deliver it.",
+    "subtitle": "Find verified technology capabilities, not just CV keywords. Search capability, evidence and availability — not only job titles.",
     "search_placeholder": "Describe the professional, provider or capability you need…",
     "find_talent": "Find Talent",
+    "sign_in": "Sign In",
+    "how_it_works": "Get Started",
     "upload_jd": "Upload Job Description",
+    "upload_jd_desc": "Paste or upload a JD and let AI extract the exact skills required.",
     "upload_sow": "Upload SOW",
-    "upload_requirement": "Upload Requirement",
+    "upload_sow_desc": "Upload a Statement of Work and discover teams that can deliver it.",
     "search_existing": "Search Existing Talent",
+    "search_existing_desc": "Browse our network of verified technology professionals.",
     "find_similar": "Find Similar",
+    "find_similar_desc": "Discover professionals with matching capabilities and experience.",
     "all": "All",
     "professionals": "Professionals",
     "providers": "Providers",
@@ -22,6 +28,8 @@
     "request_availability": "Request Availability",
     "loading": "Loading…",
     "no_results": "No professionals or providers match your search",
-    "back_to_search": "Back to Search"
+    "back_to_search": "Back to Search",
+    "privacy": "Privacy",
+    "terms": "Terms"
   }
 }
