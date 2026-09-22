@@ -1,18 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { getStats } from "@/lib/graph/seed-data";
 
 export async function GET() {
   try {
-    return NextResponse.json({
-      stats: {
-        domains: 13,
-        categories: 53,
-        vendors: 25,
-        products: 104,
-        capabilities: 20,
-        aliases: 20,
-      },
-    });
+    const stats = getStats();
+    return NextResponse.json({ stats, message: "Technology Capability Graph — Phase 2" });
   } catch (error) {
-    return NextResponse.json({ error: "Failed" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to load stats" }, { status: 500 });
   }
 }

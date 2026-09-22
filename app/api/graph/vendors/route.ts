@@ -1,23 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabase } from "@/lib/supabase/client";
+import { seedVendors, seedProducts, getVendorProducts } from "@/lib/graph/seed-data";
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = getSupabase();
     const { searchParams } = request.nextUrl;
     const q = searchParams.get("q");
 
-    let query = supabase.from("vendors").select(`
-      *,
-      products(name, name_ar)
-    `).order("sort_order", { ascending: true });
+    if (q) {
+      const filtered = seedVendors.filter(v =>
+        v.name.toLowerCase().includes(q.toLowerCase()) ||
+        v.description.toLowerCase().includes(q.toLowerCase())
+      );
+      const withProducts = filtered.map(v => ({
+        ...v,
+        products: getVendorProducts(v.id).map(p => ({ name: p.name, name_ar: p.name_ar })),
+      }));
+      return NextResponse.json({ vendors: withProducts });
+    }
 
-    if (q) query = query.ilike("name", `%${q}%`);
-
-    const { data, error } = await query;
-    if (error) throw error;
-    return NextResponse.json({ vendors: data });
+    const withProducts = seedVendors.map(v => ({
+      ...v,
+      products: getVendorProducts(v.id).map(p => ({ name: p.name, name_ar: p.name_ar })),
+    }));
+    return NextResponse.json({ vendors: withProducts });
   } catch (error) {
-    return NextResponse.json({ error: "Failed" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to load vendors" }, { status: 500 });
   }
 }

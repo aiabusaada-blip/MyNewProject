@@ -1,32 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabase } from "@/lib/supabase/client";
+import { seedProducts, seedVendors, seedCapabilities, seedCategories, searchAll } from "@/lib/graph/seed-data";
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = getSupabase();
     const { searchParams } = request.nextUrl;
     const q = searchParams.get("q") || "";
 
     if (!q) return NextResponse.json({ results: [] });
 
-    const { data: products, error: pErr } = await supabase
-      .from("products").select("name, name_ar, vendor:vendors(name, name_ar), category:technology_categories(name, name_ar)")
-      .ilike("name", `%${q}%`).limit(10);
+    const results = searchAll(q);
 
-    const { data: vendors, error: vErr } = await supabase
-      .from("vendors").select("name, name_ar, products(name, name_ar)")
-      .ilike("name", `%${q}%`).limit(10);
+    const products = results.products.slice(0, 10).map(p => {
+      const vendor = seedVendors.find(v => v.id === p.vendor_id);
+      const cat = seedCategories.find(c => c.id === p.category_id);
+      return {
+        name: p.name,
+        name_ar: p.name_ar,
+        vendor_name: vendor?.name || "",
+        vendor_name_ar: vendor?.name_ar || "",
+        category_name: cat?.name || "",
+        category_name_ar: cat?.name_ar || "",
+      };
+    });
 
-    const { data: capabilities, error: cErr } = await supabase
-      .from("capabilities").select("name, name_ar, type, product_capabilities:product_capabilities(product:products(name, name_ar))")
-      .ilike("name", `%${q}%`).limit(10);
+    const vendors = results.vendors.slice(0, 10).map(v => ({
+      name: v.name,
+      name_ar: v.name_ar,
+      products: seedProducts.filter(p => p.vendor_id === v.id).map(p => ({ name: p.name, name_ar: p.name_ar })),
+    }));
 
-    if (pErr) throw pErr;
-    if (vErr) throw vErr;
-    if (cErr) throw cErr;
+    const capabilities = results.capabilities.slice(0, 10).map(c => ({
+      name: c.name,
+      name_ar: c.name_ar,
+    }));
 
     return NextResponse.json({ results: { products, vendors, capabilities } });
   } catch (error) {
-    return NextResponse.json({ error: "Failed" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to search" }, { status: 500 });
   }
 }

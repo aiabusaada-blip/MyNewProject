@@ -1,16 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getSupabase } from "@/lib/supabase/client";
+import { NextResponse } from "next/server";
+import { seedDomains } from "@/lib/graph/seed-data";
 
 export async function GET() {
   try {
-    const supabase = getSupabase();
-    const { data, error } = await supabase
-      .from("technology_domains")
-      .select("*")
-      .order("sort_order", { ascending: true });
-    if (error) throw error;
-    return NextResponse.json({ domains: data });
+    return NextResponse.json({ domains: seedDomains });
   } catch (error) {
-    return NextResponse.json({ error: "Failed" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to load domains" }, { status: 500 });
   }
 }
