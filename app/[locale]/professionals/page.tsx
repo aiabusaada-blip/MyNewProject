@@ -1,6 +1,7 @@
 import { getTranslations } from "@/lib/i18n/request";
 import { notFound } from "next/navigation";
 import { LOCALES, DEFAULT_LOCALE } from "@/lib/i18n/config";
+import FileUploader from "@/components/upload/FileUploader";
 
 export default async function ProfessionalsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -57,7 +58,7 @@ export default async function ProfessionalsPage({ params }: { params: Promise<{ 
               lineHeight: 1.2,
             }}
           >
-            {t("cv_passport_title")}
+            {t("capability_passport")}
           </h1>
           <p
             style={{
@@ -68,7 +69,7 @@ export default async function ProfessionalsPage({ params }: { params: Promise<{ 
               margin: "0 auto",
             }}
           >
-            {t("cv_passport_subtitle")}
+            {t("capability_passport_desc")}
           </p>
         </div>
 
@@ -82,10 +83,10 @@ export default async function ProfessionalsPage({ params }: { params: Promise<{ 
           }}
         >
           {[
-            t("prof_benefit_1"),
-            t("prof_benefit_2"),
-            t("prof_benefit_3"),
-            t("prof_benefit_4"),
+            t("professionals_benefit_1"),
+            t("professionals_benefit_2"),
+            t("professionals_benefit_3"),
+            t("professionals_benefit_4"),
           ].map((label, i) => (
             <div
               key={i}
@@ -155,77 +156,14 @@ export default async function ProfessionalsPage({ params }: { params: Promise<{ 
           </ol>
         </div>
 
-        {/* Upload zone — visual preview */}
-        <div
-          style={{
-            border: "2px dashed var(--border)",
-            borderRadius: "16px",
-            padding: "48px 32px",
-            textAlign: "center",
-            background: "var(--background)",
-            marginBottom: "32px",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "3.5rem",
-              marginBottom: "16px",
-              display: "flex",
-              justifyContent: "center",
-            }}
-            aria-hidden="true"
-          >
-            📄
-          </div>
-          <h3
-            style={{
-              fontSize: "1.125rem",
-              fontWeight: 600,
-              marginBottom: "8px",
-              color: "var(--foreground)",
-            }}
-          >
-            {t("upload_zone_title")}
-          </h3>
-          <p
-            style={{
-              color: "var(--muted-foreground)",
-              fontSize: "0.875rem",
-              marginBottom: "20px",
-            }}
-          >
-            {t("upload_zone_desc")}
-          </p>
-
-          {/* File input (visual only — not functional yet) */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "10px 16px",
-              borderRadius: "8px",
-              border: "1px solid var(--border)",
-              background: "var(--muted)",
-              color: "var(--muted-foreground)",
-              fontSize: "0.8125rem",
-            }}
-          >
-            <span style={{ fontSize: "1rem" }}>📎</span>
-            <span>{t("upload_zone_file_hint")}</span>
-          </div>
-
-          <p
-            style={{
-              fontSize: "0.75rem",
-              color: "var(--muted-foreground)",
-              marginTop: "12px",
-              opacity: 0.7,
-            }}
-          >
-            {t("upload_zone_note")}
-          </p>
-        </div>
+        {/* Upload zone — real file picker */}
+        <FileUploader
+          accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          maxSizeMB={10}
+          label={t("upload_zone_title")}
+          hint={t("upload_zone_desc")}
+          statusMessage="CV selected — capability extraction will be available in the next phase."
+        />
 
         {/* Coming soon notice */}
         <div

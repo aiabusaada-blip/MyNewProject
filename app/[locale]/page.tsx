@@ -1,6 +1,7 @@
 import { getTranslations } from "@/lib/i18n/request";
 import { notFound } from "next/navigation";
 import { LOCALES, DEFAULT_LOCALE } from "@/lib/i18n/config";
+import HeroSearchBar from "@/components/search/HeroSearchBar";
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -30,19 +31,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <h1 className="hero-tagline">{t("tagline")}</h1>
         <p className="hero-subtitle">{t("subtitle")}</p>
 
-        <div className="hero-search-box">
-          <input
-            type="text"
-            className="hero-search-input"
-            placeholder={t("search_placeholder")}
-            aria-label={t("search_placeholder")}
-          />
-        </div>
-
-        <a href={`/${locale}/search`} className="hero-cta">
-          <span>{t("find_talent")}</span>
-          <span aria-hidden="true">→</span>
-        </a>
+        <HeroSearchBar locale={locale} placeholder={t("search_placeholder")} />
       </section>
 
       {/* Action Cards */}

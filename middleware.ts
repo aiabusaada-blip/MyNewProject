@@ -4,32 +4,30 @@ import type { NextRequest } from "next/server";
 const LOCALES = ["en", "ar"];
 const DEFAULT_LOCALE = "en";
 
+// Paths that should not be prefixed with a locale
+const NO_LOCALE_PATHS = ["/login", "/signup", "/professionals"];
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip API routes — they have their own domain context
-  if (pathname.startsWith("/api/")) {
-    return NextResponse.next();
-  }
-
+  // Skip API routes
+  if (pathname.startsWith("/api/")) return NextResponse.next();
   // Skip static files
-  if (pathname.startsWith("/_next/")) {
+  if (pathname.startsWith("/_next/")) return NextResponse.next();
+  // Skip auth + professionals routes
+  if (NO_LOCALE_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
     return NextResponse.next();
   }
 
-  // Check if pathname already has a locale prefix
+  // Already has a locale
   const pathnameHasLocale = LOCALES.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (l) => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
   );
+  if (pathnameHasLocale) return NextResponse.next();
 
-  if (pathnameHasLocale) {
-    return NextResponse.next();
-  }
-
-  // Redirect to default locale
-  const locale = DEFAULT_LOCALE;
+  // Add default locale
   const url = request.nextUrl.clone();
-  url.pathname = `/${locale}${pathname}`;
+  url.pathname = `/${DEFAULT_LOCALE}${pathname}`;
   return NextResponse.redirect(url);
 }
 
