@@ -1,14 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations } from "@/lib/i18n/request";
 import { notFound } from "next/navigation";
-import { config } from "@/lib/i18n/config";
+import { LOCALES, DEFAULT_LOCALE } from "@/lib/i18n/config";
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  if (!config.LOCALES.includes(locale as any)) {
+  if (!LOCALES.includes(locale as any)) {
     notFound();
   }
 
-  const t = await getTranslations("common");
+  const t = getTranslations(locale);
 
   return (
     <main style={{ minHeight: "100vh", padding: "40px 20px" }}>

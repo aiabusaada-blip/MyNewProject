@@ -8,7 +8,7 @@ export default function LoginPage() {
             <label>Email</label>
             <input type="email" style={{ width: "100%", padding: "10px", marginTop: "4px", boxSizing: "border-box" }} />
           </div>
-          <div style={{ marginBottom: "24px" }}>
+          <div style={{ marginBottom: "16px" }}>
             <label>Password</label>
             <input type="password" style={{ width: "100%", padding: "10px", marginTop: "4px", boxSizing: "border-box" }} />
           </div>
