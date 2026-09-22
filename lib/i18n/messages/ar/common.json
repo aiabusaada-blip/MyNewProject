@@ -1,0 +1,27 @@
+{
+  "common": {
+    "app_name": "نوجيل",
+    "tagline": "صف القدرة التي تحتاجها. نوجيل تجد من يستطيع تقديمها.",
+    "search_placeholder": "صف المحترف أو مزود الخدمة أو القدرة التي تحتاجها…",
+    "find_talent": "ابحث عن الكفاءات",
+    "upload_jd": "رفع وصف الوظيفة",
+    "upload_sow": "رفع بيان نطاق العمل",
+    "upload_requirement": "رفع المتطلبات",
+    "search_existing": "البحث عن الكفاءات الموجودة",
+    "find_similar": "ابحث عن المشابهين",
+    "all": "الكل",
+    "professionals": "المحترفون",
+    "providers": "مقدمو الخدمات",
+    "match_score": "التطابق",
+    "evidence_confidence": "ثقة الأدلة",
+    "profile_freshness": "حداثة الملف",
+    "shortlist": "القائمة المختصرة",
+    "compare": "المقارنة",
+    "contact": "اتصل",
+    "find_similar_candidate": "ابحث عن مشابه",
+    "request_availability": "طلب تأكيد التوفر",
+    "loading": "جارٍ التحميل…",
+    "no_results": "لا يوجد محترفون أو مقدمو خدمات يطابقون بحثك",
+    "back_to_search": "العودة إلى البحث"
+  }
+}

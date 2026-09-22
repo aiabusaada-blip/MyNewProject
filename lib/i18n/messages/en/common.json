@@ -1,0 +1,27 @@
+{
+  "common": {
+    "app_name": "Nujeel",
+    "tagline": "Describe the capability you need. Nujeel finds who can deliver it.",
+    "search_placeholder": "Describe the professional, provider or capability you need…",
+    "find_talent": "Find Talent",
+    "upload_jd": "Upload Job Description",
+    "upload_sow": "Upload SOW",
+    "upload_requirement": "Upload Requirement",
+    "search_existing": "Search Existing Talent",
+    "find_similar": "Find Similar",
+    "all": "All",
+    "professionals": "Professionals",
+    "providers": "Providers",
+    "match_score": "Match",
+    "evidence_confidence": "Evidence",
+    "profile_freshness": "Freshness",
+    "shortlist": "Shortlist",
+    "compare": "Compare",
+    "contact": "Contact",
+    "find_similar_candidate": "Find Similar",
+    "request_availability": "Request Availability",
+    "loading": "Loading…",
+    "no_results": "No professionals or providers match your search",
+    "back_to_search": "Back to Search"
+  }
+}
