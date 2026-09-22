@@ -7,6 +7,16 @@ const DEFAULT_LOCALE = "en";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Skip API routes — they have their own domain context
+  if (pathname.startsWith("/api/")) {
+    return NextResponse.next();
+  }
+
+  // Skip static files
+  if (pathname.startsWith("/_next/")) {
+    return NextResponse.next();
+  }
+
   // Check if pathname already has a locale prefix
   const pathnameHasLocale = LOCALES.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
@@ -24,7 +34,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next|.*\\..*|api/.*).*)",
-  ],
+  matcher: ["/((?!_next|.*\\..*).*)"],
 };
