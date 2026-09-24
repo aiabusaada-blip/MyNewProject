@@ -17,7 +17,7 @@ export function getSupabase(): SupabaseClient {
 }
 
 export async function getServerSupabase() {
-  const { createClient: createServerClient } = await import("@supabase/ssr");
+  const { createServerClient } = await import("@supabase/ssr");
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 

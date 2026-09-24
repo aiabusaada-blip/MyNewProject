@@ -50,7 +50,7 @@ export default async function SOWPage({ params }: { params: Promise<{ locale: st
 
         <FileUploader accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" maxSizeMB={10} label={label} hint={hint} statusMessage={statusMsg} />
 
-        <div style={{ marginTop: "24px", padding: "20px", borderRadius: "12px", border: "1px solid var(--accent)", background: "var(--accent)", textAlign: "center" }}>
+        <div style={{ marginTop: "24px", padding: "20px", borderRadius: "12px", border: "1px solid var(--accent)", background: "var(--accent)", textAlign: "center" as const }}>
           <p style={{ color: "var(--accent-foreground)", fontSize: "0.875rem", marginBottom: "6px", fontWeight: 600 }}>
             {t("coming_soon_label")}
           </p>

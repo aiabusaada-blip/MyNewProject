@@ -20,7 +20,13 @@ export async function GET(request: NextRequest) {
 
     const withProducts = seedVendors.map(v => ({
       ...v,
-      products: getVendorProducts(v.id).map(p => ({ name: p.name, name_ar: p.name_ar })),
+      products: getVendorProducts(v.id).map(p => ({
+        id: p.id,
+        name: p.name,
+        name_ar: p.name_ar,
+        description: p.description,
+        category_id: p.category_id,
+      })),
     }));
     return NextResponse.json({ vendors: withProducts });
   } catch (error) {

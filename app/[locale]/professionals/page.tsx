@@ -32,7 +32,7 @@ export default async function ProfessionalsPage({ params }: { params: Promise<{ 
         </a>
 
         {/* Hero */}
-        <div style={{ marginBottom: "40px", textAlign: "center" }}>
+        <div style={{ marginBottom: "40px", textAlign: "center" as const }}>
           <div
             style={{
               display: "inline-block",
@@ -95,7 +95,7 @@ export default async function ProfessionalsPage({ params }: { params: Promise<{ 
                 borderRadius: "12px",
                 border: "1px solid var(--border)",
                 background: "var(--background)",
-                textAlign: "center",
+                textAlign: "center" as const,
               }}
             >
               <div
@@ -172,7 +172,7 @@ export default async function ProfessionalsPage({ params }: { params: Promise<{ 
             borderRadius: "12px",
             border: "1px solid var(--accent)",
             background: "var(--accent)",
-            textAlign: "center",
+            textAlign: "center" as const,
           }}
         >
           <p
@@ -197,7 +197,7 @@ export default async function ProfessionalsPage({ params }: { params: Promise<{ 
         </div>
 
         {/* Add My CV button */}
-        <div style={{ textAlign: "center", marginTop: "32px" }}>
+        <div style={{ textAlign: "center" as const, marginTop: "32px" }}>
           <a
             href={`/${locale}/login`}
             style={{

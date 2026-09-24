@@ -12,7 +12,8 @@ interface FileUploaderProps {
   hint?: string;
   /** Help text shown after file is selected (string, not function) */
   statusMessage?: string;
-  /** If provided, overrides statusMessage when a file is selected */
+  /** Message shown when file is ready */
+  readyMessage?: string;
   /** Whether to show a "Remove" button */
   removable?: boolean;
   /** Disabled state */

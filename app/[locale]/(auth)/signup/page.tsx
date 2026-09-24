@@ -87,10 +87,10 @@ export default function SignupPage() {
   const labelStyle = { display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "4px", color: "var(--foreground)" };
   const inputStyle = {
     width: "100%", padding: "10px", marginTop: "4px", borderRadius: "6px",
-    border: "1px solid var(--border)", boxSizing: "border-box", fontSize: "0.875rem", color: "var(--foreground)",
+    border: "1px solid var(--border)", fontSize: "0.875rem", color: "var(--foreground)",
   };
   const headingStyle = { fontSize: "1.5rem", marginBottom: "24px", color: "var(--foreground)" };
-  const footerStyle = { textAlign: "center", marginTop: "16px", fontSize: "0.8125rem", color: "var(--muted-foreground)" };
+  const footerStyle = { marginTop: "16px", fontSize: "0.8125rem", color: "var(--muted-foreground)" };
   const linkStyle = { color: "var(--primary)", textDecoration: "none" };
 
   const renderForm = () => (
@@ -129,8 +129,8 @@ export default function SignupPage() {
     return (
       <main style={baseStyle}>
         <div style={cardStyle}>
-          <h1 style={{ ...headingStyle, textAlign: "center" }}>{t("check_email") ?? "Check your email"}</h1>
-          <p style={{ color: "var(--muted-foreground)", textAlign: "center", lineHeight: 1.6 }}>
+          <h1 style={{ ...headingStyle, margin: "0 auto", textAlign: "center" as const }}>{t("check_email") ?? "Check your email"}</h1>
+          <p style={{ color: "var(--muted-foreground)", margin: "0 auto", lineHeight: 1.6 }}>
             {locale === "ar" ? t("signup_success_desc") : `We&apos;ve sent a confirmation link to <strong>${email}</strong>. Click it to verify your account and sign in.`}
           </p>
         </div>

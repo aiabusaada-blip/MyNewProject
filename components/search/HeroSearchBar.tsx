@@ -20,9 +20,7 @@ export default function HeroSearchBar({ locale, placeholder }: HeroSearchBarProp
 
     setLoading(true);
     // Navigate to search page with the query preserved as a URL param
-    router.push(`/${locale}/search?q=${encodeURIComponent(trimmed)}`, {
-      state: { fromHero: true },
-    });
+    router.push(`/${locale}/search?q=${encodeURIComponent(trimmed)}`);
     // Reset after navigation
     setTimeout(() => setLoading(false), 500);
   };

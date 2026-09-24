@@ -71,10 +71,10 @@ export default function LoginPage() {
   const labelStyle = { display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "4px", color: "var(--foreground)" };
   const inputStyle = {
     width: "100%", padding: "10px", marginTop: "4px", borderRadius: "6px",
-    border: "1px solid var(--border)", boxSizing: "border-box", fontSize: "0.875rem", color: "var(--foreground)",
+    border: "1px solid var(--border)", fontSize: "0.875rem", color: "var(--foreground)",
   };
   const headingStyle = { fontSize: "1.5rem", marginBottom: "24px", color: "var(--foreground)" };
-  const footerStyle = { textAlign: "center", marginTop: "16px", fontSize: "0.8125rem", color: "var(--muted-foreground)" };
+  const footerStyle = { marginTop: "16px", fontSize: "0.8125rem", color: "var(--muted-foreground)" };
   const linkStyle = { color: "var(--primary)", textDecoration: "none" };
 
   const renderForm = () => (

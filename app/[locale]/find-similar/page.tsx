@@ -120,7 +120,7 @@ export default async function FindSimilarPage({ params }: { params: Promise<{ lo
             border: "2px dashed var(--border)",
             borderRadius: "12px",
             padding: "32px",
-            textAlign: "center",
+            textAlign: "center" as const,
             background: "var(--background)",
             marginBottom: "24px",
           }}
@@ -223,7 +223,7 @@ export default async function FindSimilarPage({ params }: { params: Promise<{ lo
             borderRadius: "12px",
             border: "1px solid var(--accent)",
             background: "var(--accent)",
-            textAlign: "center",
+            textAlign: "center" as const,
           }}
         >
           <p

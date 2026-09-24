@@ -74,7 +74,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           style={{
             maxWidth: "1000px",
             margin: "0 auto",
-            textAlign: "center",
+            textAlign: "center" as const,
           }}
         >
           <span

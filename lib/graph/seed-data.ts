@@ -22,7 +22,7 @@ export interface Category {
 export interface Vendor {
   id: string;
   name: string;
-  name_ar: string;
+  name_ar?: string;
   description: string;
   headquarters_country_id?: string;
   website?: string;
@@ -34,7 +34,7 @@ export interface Product {
   id: string;
   vendor_id: string;
   name: string;
-  name_ar: string;
+  name_ar?: string;
   description: string;
   category_id?: string;
   sort_order: number;

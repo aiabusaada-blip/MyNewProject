@@ -13,7 +13,7 @@ export function hasPermission(role: AppRole, permission: string): boolean {
   const rolePermissions: Record<AppRole, string[]> = {
     ADMIN: ["read", "write", "delete", "manage_taxonomy", "manage_organizations", "manage_scoring"],
     CUSTOMER_ADMIN: ["read", "write", "manage_organization", "invite", "import_talent"],
-    CUSTOMER_RECRUICER: ["read", "search", "create_requirement", "upload_document", "shortlist"],
+    CUSTOMER_RECRUITER: ["read", "search", "create_requirement", "upload_document", "shortlist"],
     PROVIDER_ADMIN: ["read", "write", "manage_provider", "manage_members"],
     PROVIDER_MEMBER: ["read", "view_own_profile", "update_availability", "confirm_availability"],
     PROFESSIONAL: ["read", "view_own_profile", "update_profile", "manage_privacy", "pulse"],

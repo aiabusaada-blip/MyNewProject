@@ -83,7 +83,7 @@ export default async function SearchPage({
               type="search"
               defaultValue={sp.q || ""}
               placeholder="e.g. cybersecurity, devops, cloud infrastructure…"
-              style={{ width: "100%", padding: "10px 14px", borderRadius: "8px", border: "1px solid var(--border)", fontSize: "0.9375rem", color: "var(--foreground)", background: "var(--background)", boxSizing: "border-box" }}
+              style={{ width: "100%", padding: "10px 14px", borderRadius: "8px", border: "1px solid var(--border)", fontSize: "0.9375rem", color: "var(--foreground)", background: "var(--background)" }}
             />
           </div>
 
@@ -95,7 +95,7 @@ export default async function SearchPage({
               </label>
               <select
                 defaultValue={sp.location || ""}
-                style={{ width: "100%", padding: "8px 10px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--background)", color: "var(--foreground)", fontSize: "0.8125rem", boxSizing: "border-box", cursor: "pointer" }}
+                style={{ width: "100%", padding: "8px 10px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--background)", color: "var(--foreground)", fontSize: "0.8125rem",  cursor: "pointer" }}
               >
                 {locationOptions.map((o) => (
                   <option key={o.value} value={o.value}>{o.label}</option>
@@ -109,7 +109,7 @@ export default async function SearchPage({
               </label>
               <select
                 defaultValue={sp.domain || ""}
-                style={{ width: "100%", padding: "8px 10px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--background)", color: "var(--foreground)", fontSize: "0.8125rem", boxSizing: "border-box", cursor: "pointer" }}
+                style={{ width: "100%", padding: "8px 10px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--background)", color: "var(--foreground)", fontSize: "0.8125rem",  cursor: "pointer" }}
               >
                 <option value="">{t("all")}</option>
                 {domainOptions.map((d) => (
@@ -127,7 +127,7 @@ export default async function SearchPage({
               </label>
               <select
                 defaultValue={sp.vendor || ""}
-                style={{ width: "100%", padding: "8px 10px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--background)", color: "var(--foreground)", fontSize: "0.8125rem", boxSizing: "border-box", cursor: "pointer" }}
+                style={{ width: "100%", padding: "8px 10px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--background)", color: "var(--foreground)", fontSize: "0.8125rem",  cursor: "pointer" }}
               >
                 <option value="">{t("all")}</option>
                 {vendorOptions.map((v) => (
@@ -142,7 +142,7 @@ export default async function SearchPage({
               </label>
               <select
                 defaultValue={sp.category || ""}
-                style={{ width: "100%", padding: "8px 10px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--background)", color: "var(--foreground)", fontSize: "0.8125rem", boxSizing: "border-box", cursor: "pointer" }}
+                style={{ width: "100%", padding: "8px 10px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--background)", color: "var(--foreground)", fontSize: "0.8125rem",  cursor: "pointer" }}
               >
                 <option value="">{t("all")}</option>
                 {seedCategories.sort((a, b) => a.name.localeCompare(b.name)).map((c) => (
@@ -181,7 +181,7 @@ export default async function SearchPage({
           </div>
 
           {/* Empty state */}
-          <div style={{ padding: "32px 24px", border: "1px dashed var(--border)", borderRadius: "8px", textAlign: "center" }}>
+          <div style={{ padding: "32px 24px", border: "1px dashed var(--border)", borderRadius: "8px", textAlign: "center" as const }}>
             <div style={{ fontSize: "2.5rem", marginBottom: "12px" }} aria-hidden="true">🔍</div>
             <h3 style={{ fontSize: "1.0625rem", fontWeight: 600, marginBottom: "8px", color: "var(--foreground)" }}>
               {t("no_results")}

@@ -26,7 +26,7 @@ export default async function GraphPage({ params }: { params: Promise<{ locale: 
             style={{
               width: "100%", padding: "16px 24px", fontSize: "1rem",
               borderRadius: "16px", border: "2px solid var(--border)",
-              background: "var(--card)", outline: "none", boxSizing: "border-box",
+              background: "var(--card)", outline: "none", 
             }}
           />
         </div>
